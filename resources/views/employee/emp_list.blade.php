@@ -18,6 +18,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <div class="message"></div>
    
     <table class="table table-bordered">
         <tr>
@@ -101,15 +102,23 @@
           type: "GET",
           success: function(data) {
             console.log(data);
-            if(data){
-              $("#mi-modal").modal('hide');
-              alert('Record Deleted Successfully');
-              $('.delete_'+id).closest( "tr" ).remove();
-              setIndex();
-          }
+            if(data.success){
+                $("#mi-modal").modal('hide');
+              //  alert('Record Deleted Successfully');
+                $('.delete_'+id).closest( "tr" ).remove();
+                setIndex();
+                var msg = '<div class="alert alert-success">'+
+                '<p>'+data.message+'</p>'+
+                '</div>';
+                $('.message').html(msg);
+              }
           },
           error: function() {
-           alert('Error occure while deleting record');
+           var str = 'Error occure while deleting record';
+           var msg = '<div class="alert alert-danger">'+
+            '<p>'+str+'</p>'+
+            '</div>';
+            $('.message').html(msg);
           },
         });
     });

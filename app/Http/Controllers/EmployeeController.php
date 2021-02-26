@@ -100,6 +100,6 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
          Employee::where('id',$id)->delete();
-        return response()->json(['success'=>true]);
+        return response()->json(['success'=>true,'message'=>'Employee Deleted successfully.!']);
     }
 }
